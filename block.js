@@ -1,5 +1,6 @@
 // definition of a block in blockchain
-const {GENESIS_DATA} = require("./config")
+const {GENESIS_DATA} = require("./config");
+const cryptoHash = require("./crypto-hash");
 
 class Block {
     constructor({timestamp, lastHash, hash, data}) {
@@ -14,10 +15,14 @@ class Block {
     }
 
     static mineBlock({lastBlock,data}) {
+        const timestamp = Date.now();
+        const lastHash = lastBlock.hash;
+
         return new Block({
-            timestamp: Date.now(),
-            lastHash: lastBlock.hash,
-            data
+            timestamp,
+            lastHash,
+            data,
+            hash: cryptoHash(timestamp,lastHash,data)
         });
     }
 }
