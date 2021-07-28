@@ -1,0 +1,23 @@
+{
+  "name": "cryptochain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viettran1010/cryptochain.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viettran1010/cryptochain/issues"
+  },
+  "homepage": "https://github.com/viettran1010/cryptochain#readme",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}
