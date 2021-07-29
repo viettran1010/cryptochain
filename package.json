@@ -19,5 +19,8 @@
   "homepage": "https://github.com/viettran1010/cryptochain#readme",
   "devDependencies": {
     "jest": "^27.0.6"
+  },
+  "dependencies": {
+    "hex-to-binary": "^1.0.1"
   }
 }
