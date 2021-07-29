@@ -35,11 +35,16 @@ class Blockchain {
 
             const actualLastHash = chain[i-1].hash
 
+            const lastDifficulty = chain[i-1].difficulty;
+
             if (lastHash!==actualLastHash) return false;
 
             const validatedHash = cryptoHash(actualLastHash,timestamp,data,nonce,difficulty);
 
             if (hash !== validatedHash) return false;
+
+            //if difficulty raised too dramatically, it could slow down the how system
+            if (Math.abs(lastDifficulty-difficulty)>1) return false;
         }
         
         return true
