@@ -1,6 +1,7 @@
 const Block = require('./block')
+const cryptoHash = require('./crypto-hash')
 
-class BlockChain {
+class Blockchain {
     constructor(){
         this.chain = [Block.genesis()]
     }
@@ -13,6 +14,24 @@ class BlockChain {
 
         this.chain.push(newBlock)
     }
+
+    static isValidChain(chain) {  
+        if (JSON.stringify(chain[0])!==JSON.stringify(Block.genesis())) return false;
+        
+        for (let i = 1; i < chain.length; i++) {
+            const {timestamp,lastHash,hash,data} = chain[i];
+
+            const actualLastHash = chain[i-1].hash
+
+            if (lastHash!==actualLastHash) return false;
+
+            const validatedHash = cryptoHash(actualLastHash,timestamp,data);
+
+            if (hash !== validatedHash) return false;
+        }
+        
+        return true
+    }
 }
 
-module.exports = BlockChain
+module.exports = Blockchain
