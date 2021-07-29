@@ -24,6 +24,7 @@ class Blockchain {
             console.error('The incoming chain must be valid')
             return;
         }
+        console.log(`replacing chain with ${JSON.stringify(chain)}`);
         this.chain = chain;
     }
 
