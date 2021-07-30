@@ -38,4 +38,8 @@ describe('Wallet', ()=>{
             })).toBe(false)
         })
     })
+
+    describe('createTransaction()', ()=>{
+        
+    })
 })
