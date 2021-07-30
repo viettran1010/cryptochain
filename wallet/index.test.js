@@ -1,6 +1,7 @@
 const { it } = require('@jest/globals');
 const Wallet = require('./index');
 const {verifySignature} = require('../util')
+const Transaction = require('./transaction')
 
 describe('Wallet', ()=>{
     let wallet;
@@ -40,6 +41,33 @@ describe('Wallet', ()=>{
     })
 
     describe('createTransaction()', ()=>{
-        
+        describe('and the amout exceeds the balance', ()=>{
+            it('throw an error', ()=> {
+                expect(()=> wallet.createTransaction({amount:99999, recipient:'foo-recipient'}))
+                    .toThrow('amount exceeds balance');
+            })
+        })
+
+        describe('and the amount is valid', ()=>{
+            let transaction, amount, recipient;
+
+            beforeEach(()=> {
+                amount = 50;
+                recipient = 'foo-recipient';
+                transaction = wallet.createTransaction({amount, recipient})
+            })
+
+            it('creates an instance oftransaction', ()=> {
+                expect(transaction instanceof Transaction).toBe(true)
+            })
+
+            it('matches the transaction input with the wallet', ()=> {
+                expect(transaction.input.address).toEqual(wallet.publicKey);
+            })
+
+            it('outputs the amount of the recipient', ()=> {
+                expect(transaction.outputMap[recipient]).toEqual(amount)
+            })
+        })
     })
 })
