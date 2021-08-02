@@ -1,6 +1,7 @@
 const TransactionPool = require('./transaction-pool');
 const Transaction = require('./transaction');
 const Wallet = require('./');
+const BlockChain = require('../blockchain/');
 
 describe('TransactionPool', () => {
     let transactionPool, transaction, senderWallet;
@@ -70,6 +71,41 @@ describe('TransactionPool', () => {
         it('logs errors for invalid transactions', ()=> {
             transactionPool.validTransactions();
             expect(errorMock).toHaveBeenCalled();
+        })
+    })
+
+    // describe('clear()', ()=> {
+    //     it('clears the transactions', ()=> {
+    //         transactionPool.clear();
+    //         expect(transactionPool.transactionMap).toEqual({})
+    //     })
+    // })
+
+    // we only want to clear transactions in the blockchain because they are recorded, 
+    // we don't clear the remaing transactions
+    describe('clearBlockChainTransactions()', ()=> { 
+        it('clears the pool of any existing blockchain transactions', ()=> {
+            const blockchain = new BlockChain();
+            const expectedTransactionMap = {}
+
+            for (let i = 0; i < 6; i++) {
+                const transaction = new Wallet().createTransaction({
+                    recipient: 'foo',
+                    amount: 20
+                })
+
+                transactionPool.setTransaction(transaction);
+
+                if (i % 2) {
+                    blockchain.addBlock({data: [transaction]});
+                }
+                else {
+                    expectedTransactionMap[transaction.id] = transaction;
+                }
+            }
+
+            transactionPool.clearBlockChainTransactions({chain:blockchain.chain})
+            expect(transactionPool.transactionMap).toEqual(expectedTransactionMap);
         })
     })
 })
