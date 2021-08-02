@@ -74,12 +74,12 @@ describe('TransactionPool', () => {
         })
     })
 
-    // describe('clear()', ()=> {
-    //     it('clears the transactions', ()=> {
-    //         transactionPool.clear();
-    //         expect(transactionPool.transactionMap).toEqual({})
-    //     })
-    // })
+    describe('clear()', ()=> {
+        it('clears the transactions', ()=> {
+            transactionPool.clear();
+            expect(transactionPool.transactionMap).toEqual({})
+        })
+    })
 
     // we only want to clear transactions in the blockchain because they are recorded, 
     // we don't clear the remaing transactions

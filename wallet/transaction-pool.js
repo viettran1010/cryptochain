@@ -24,9 +24,9 @@ class TransactionPool {
             transaction => Transaction.validTransaction(transaction))
     }
 
-    // clear() {
-    //     this.transactionMap = {}
-    // }
+    clear() {
+        this.transactionMap = {}
+    }
 
     clearBlockChainTransactions({chain}) {
         for (let i = 1; i < chain.length; i++) { // skip genesis block
