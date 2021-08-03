@@ -7,6 +7,7 @@ const PubSub = require("./app/pubsub");
 const TransactionPool = require("./wallet/transaction-pool");
 const Wallet = require("./wallet");
 const TransactionMiner = require("./app/transaction-miner");
+const cors = require("cors");
 
 const app = express();
 const blockchain = new Blockchain();
@@ -25,6 +26,7 @@ const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client/dist"))); //to serve files, not just html
+app.use(cors());
 
 app.get("/api/blocks", (req, res) => {
   res.json(blockchain.chain);
