@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
-    "start": "node index.js",
-    "dev": "npm run start-redis && nodemon index.js",
+    "start": "npm run build-client && node index.js",
+    "dev": "npm run dev-client & npm run start-redis && nodemon index.js",
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js",
     "start-redis": "redis-server --daemonize yes",
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
-    "build-client": "parcel build client/src/index.html --out-dir client/dist"
+    "build-client": "parcel build client/src/index.html --out-dir client/dist",
+    "dev-client": "parcel client/src/index.html --out-dir client/dist",
+    "clean": "rm -rf .cache client/dist"
   },
   "jest": {
     "testEnvironment": "node"
