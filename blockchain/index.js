@@ -1,5 +1,8 @@
 const Block = require("./block");
 const { cryptoHash } = require("../util");
+const { REWARD_INPUT, MINING_REWARD } = require("../config");
+const Transaction = require("../wallet/transaction");
+const Wallet = require("../wallet/");
 
 class Blockchain {
   constructor() {
@@ -15,7 +18,7 @@ class Blockchain {
     this.chain.push(newBlock);
   }
 
-  replaceChain(chain, onSuccess) {
+  replaceChain(chain, validateTransaction, onSuccess) {
     if (chain.length <= this.chain.length) {
       console.error("The incoming chain must be longer");
       return;
@@ -25,9 +28,62 @@ class Blockchain {
       return;
     }
 
+    if (validateTransaction && !this.validTransactionData({ chain })) {
+      console.error("the incoming chain has invalid data");
+      return;
+    }
+
     onSuccess && onSuccess();
     console.log(`replacing chain with ${JSON.stringify(chain)}`);
     this.chain = chain;
+  }
+
+  // this is not static since we will rely on instance's blockchain history to validate,
+  // not the input's because that can be faked
+  validTransactionData({ chain }) {
+    for (let i = 1; i < chain.length; i++) {
+      const block = chain[i];
+      let rewardTransactionCount = 0;
+
+      const transactionSet = new Set();
+
+      for (let transaction of block.data) {
+        if (transaction.input.address === REWARD_INPUT.address) {
+          rewardTransactionCount++;
+          if (rewardTransactionCount > 1) {
+            console.error("there are more than 1 reward transaction per block");
+            return false;
+          }
+          if (Object.values(transaction.outputMap)[0] !== MINING_REWARD) {
+            console.error("miner reward amout is invalid");
+            return false;
+          }
+        } else {
+          if (!Transaction.validTransaction(transaction)) {
+            console.error("invalid transaction");
+            return false;
+          }
+
+          // check balance when input chain is faked
+          const trueBalance = Wallet.calculateBalance({
+            chain: this.chain,
+            address: transaction.input.address,
+          });
+
+          if (transaction.input.amount !== trueBalance) {
+            console.error("invalid input amount");
+            return false;
+          }
+        }
+
+        if (transactionSet.has(transaction)) {
+          console.error("there are identical transactions");
+          return false;
+        } else transactionSet.add(transaction);
+      }
+    }
+
+    return true;
   }
 
   static isValidChain(chain) {
