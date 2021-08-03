@@ -9,7 +9,8 @@
     "dev": "npm run start-redis && nodemon index.js",
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js",
     "start-redis": "redis-server --daemonize yes",
-    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\"",
+    "build-client": "parcel build client/src/index.html --out-dir client/dist"
   },
   "jest": {
     "testEnvironment": "node"
@@ -36,6 +37,9 @@
     "express": "^4.17.1",
     "hex-to-binary": "^1.0.1",
     "nodemon": "^2.0.12",
+    "parcel-bundler": "^1.12.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "redis": "^3.1.2",
     "request": "^2.88.2",
     "uuid": "^8.3.2"
