@@ -22,6 +22,9 @@ const App = () => {
       <div>
         <Link to="/conduct-transaction">Conduct Transaction</Link>
       </div>
+      <div>
+        <Link to="/transaction-pool">Transaction Pool</Link>
+      </div>
       <br></br>
       <div>Address: {wallet?.walletInfo?.address}</div>
       <div>Balance: {wallet?.walletInfo?.balance}</div>

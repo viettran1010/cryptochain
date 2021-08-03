@@ -2,7 +2,6 @@ import React from "react";
 
 const Transaction = ({ input, outputMap }) => {
   const recipients = Object.keys(outputMap);
-  //   alert(recipients);
   return (
     <div>
       <div>

@@ -5,12 +5,14 @@ import history from "./history";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Blocks from "./components/Blocks";
 import ConductTransaction from "./components/ConductTransaction";
+import TransactionPool from "./components/TransactionPool";
 
 render(
   <Router history={history}>
     <Switch>
       <Route path="/conduct-transaction" component={ConductTransaction}></Route>
       <Route path="/blocks" component={Blocks}></Route>
+      <Route path="/transaction-pool" component={TransactionPool}></Route>
       <Route path="/" component={App} />
     </Switch>
   </Router>,

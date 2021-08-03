@@ -13,7 +13,6 @@ const ConductTransaction = () => {
   };
 
   const updateAmount = (event) => {
-    alert(Number(event.target.value));
     setAmount(Number(event.target.value));
   };
 
@@ -22,12 +21,11 @@ const ConductTransaction = () => {
       recipient,
       amount,
     });
-    alert(JSON.stringify(res));
   };
 
   return (
     <div>
-      <Link to="/"></Link>
+      <Link to="/">Home</Link>
       <h3>Conduct a transaction</h3>
       <FormGroup>
         <FormControl
@@ -46,9 +44,7 @@ const ConductTransaction = () => {
         ></FormControl>
       </FormGroup>
       <div>
-        <Button bsStyle="danger" onClick={conductTransaction}>
-          Submit
-        </Button>
+        <Button onClick={conductTransaction}>Submit</Button>
       </div>
     </div>
   );
