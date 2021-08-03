@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "regenerator-runtime/runtime"; // import this to use async/await with parcel
-import Blocks from "./Blocks";
+import { Link } from "react-router-dom";
 
 const App = () => {
   const [wallet, setWallet] = useState({});
@@ -15,10 +15,14 @@ const App = () => {
   return (
     <div>
       Welcome to the blockchain!
+      <br></br>
+      <div>
+        <Link to="/blocks">Blocks</Link>
+      </div>
+      <br></br>
       <div>Address: {wallet?.walletInfo?.address}</div>
       <div>Balance: {wallet?.walletInfo?.balance}</div>
       <br></br>
-      <Blocks></Blocks>
     </div>
   );
 };

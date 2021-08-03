@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Block from "./Block";
+import { Link } from "react-router-dom";
 import "regenerator-runtime/runtime"; // import this to use async/await with parcel
 
 const Blocks = () => {
@@ -13,6 +14,10 @@ const Blocks = () => {
 
   return (
     <div>
+      <div>
+        <Link to="/">Home</Link>
+      </div>
+
       <h3>Blocks</h3>
       <div>
         {blocks.map((block) => (
