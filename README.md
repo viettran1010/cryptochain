@@ -28,5 +28,5 @@ Technical facts and limitations:
 
 How to run:
 - On local: npm i && npm run dev 
-- On prod: https://pure-beyond-61034.herokuapp.com/#/
+- On prod: https://pure-beyond-61034.herokuapp.com/#/ (might take some time for the idle VM to start)
 - For testing: npm run test
