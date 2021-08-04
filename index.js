@@ -11,6 +11,10 @@ const cors = require("cors");
 
 const isDevelopment = process.env.ENV === "development";
 
+const REDIS_URL = "redis://127.0.0.1:6379";
+const DEFAULT_PORT = 3000;
+const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
+
 const app = express();
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
@@ -22,10 +26,6 @@ const transactionMiner = new TransactionMiner({
   wallet,
   pubsub,
 });
-
-const REDIS_URL = "redis://127.0.0.1:6379";
-const DEFAULT_PORT = 3000;
-const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client/dist"))); //to serve files, not just html

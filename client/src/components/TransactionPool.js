@@ -10,14 +10,16 @@ const TransactionPool = () => {
   const history = useHistory();
   const fetchTransactionPoolMap = async () => {
     const res = await axios.get(
-      "http://localhost:3000/api/transaction-pool-map"
+      `${document.location.origin}/api/transaction-pool-map`
     );
 
     setTransactionPoolMap(res.data);
   };
 
   const fetchMineTransactions = async () => {
-    const res = await axios.get("http://localhost:3000/api/mine-transaction");
+    const res = await axios.get(
+      `${document.location.origin}/api/mine-transaction`
+    );
     console.dir(res);
     if (res.status === 200) {
       alert("Mine transaction successful");

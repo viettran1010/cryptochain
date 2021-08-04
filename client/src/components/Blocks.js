@@ -8,7 +8,8 @@ const Blocks = () => {
   const [blocks, setBlocks] = useState([]);
 
   useEffect(async () => {
-    const data = (await axios.get("http://localhost:3000/api/blocks")).data;
+    const data = (await axios.get(`${document.location.origin}/api/blocks`))
+      .data;
     setBlocks(data);
   }, []);
 

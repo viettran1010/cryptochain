@@ -18,7 +18,7 @@ const ConductTransaction = () => {
   };
 
   const conductTransaction = async () => {
-    await axios.post("http://localhost:3000/api/transact", {
+    await axios.post(`${document.location.origin}/api/transact`, {
       recipient,
       amount,
     });
