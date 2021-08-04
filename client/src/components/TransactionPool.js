@@ -18,7 +18,7 @@ const TransactionPool = () => {
 
   const fetchMineTransactions = async () => {
     const res = await axios.get(
-      `${document.location.origin}/api/mine-transaction`
+      `${document.location.origin}/api/mine-transactions`
     );
     console.dir(res);
     if (res.status === 200) {
@@ -48,7 +48,7 @@ const TransactionPool = () => {
           ></Transaction>
         </div>
       ))}
-      <Button onClick={fetchMineTransactions}>Mine transaction</Button>
+      <Button onClick={fetchMineTransactions}>Mine Transactions</Button>
     </div>
   );
 };

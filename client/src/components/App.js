@@ -14,13 +14,13 @@ const App = () => {
 
   return (
     <div>
-      Welcome to the blockchain!
       <br></br>
       <div>
-        <Link to="/blocks">Blocks</Link>
-      </div>
-      <div>
         <Link to="/conduct-transaction">Conduct Transaction</Link>
+      </div>
+
+      <div>
+        <Link to="/blocks">Blocks</Link>
       </div>
       <div>
         <Link to="/transaction-pool">Transaction Pool</Link>

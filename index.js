@@ -125,59 +125,59 @@ const syncWithRootState = () => {
   );
 };
 
-if (isDevelopment) {
-  const wallet1 = new Wallet();
-  const wallet2 = new Wallet();
+// if (isDevelopment) {
+//   const wallet1 = new Wallet();
+//   const wallet2 = new Wallet();
 
-  const generateWalletTransactions = ({ wallet, recipient, amount }) => {
-    const transaction = wallet.createTransaction({
-      recipient,
-      amount,
-      chain: blockchain.chain,
-    });
+//   const generateWalletTransactions = ({ wallet, recipient, amount }) => {
+//     const transaction = wallet.createTransaction({
+//       recipient,
+//       amount,
+//       chain: blockchain.chain,
+//     });
 
-    transactionPool.setTransaction(transaction);
-  };
+//     transactionPool.setTransaction(transaction);
+//   };
 
-  const walletAction = () => {
-    generateWalletTransactions({
-      wallet,
-      recipient: wallet1.publicKey,
-      amount: 5,
-    });
-  };
+//   const walletAction = () => {
+//     generateWalletTransactions({
+//       wallet,
+//       recipient: wallet1.publicKey,
+//       amount: 5,
+//     });
+//   };
 
-  const wallet1Action = () => {
-    generateWalletTransactions({
-      wallet: wallet1,
-      recipient: wallet2.publicKey,
-      amount: 10,
-    });
-  };
+//   const wallet1Action = () => {
+//     generateWalletTransactions({
+//       wallet: wallet1,
+//       recipient: wallet2.publicKey,
+//       amount: 10,
+//     });
+//   };
 
-  const wallet2Action = () => {
-    generateWalletTransactions({
-      wallet: wallet2,
-      recipient: wallet.publicKey,
-      amount: 15,
-    });
-  };
+//   const wallet2Action = () => {
+//     generateWalletTransactions({
+//       wallet: wallet2,
+//       recipient: wallet.publicKey,
+//       amount: 15,
+//     });
+//   };
 
-  for (let i = 0; i < 10; i++) {
-    if (i % 3 === 0) {
-      walletAction();
-      wallet1Action();
-    } else if (i % 3 === 1) {
-      walletAction();
-      wallet2Action();
-    } else {
-      wallet1Action();
-      wallet2Action();
-    }
+//   for (let i = 0; i < 10; i++) {
+//     if (i % 3 === 0) {
+//       walletAction();
+//       wallet1Action();
+//     } else if (i % 3 === 1) {
+//       walletAction();
+//       wallet2Action();
+//     } else {
+//       wallet1Action();
+//       wallet2Action();
+//     }
 
-    transactionMiner.mineTransactions();
-  }
-}
+//     transactionMiner.mineTransactions();
+//   }
+// }
 
 let PEER_PORT;
 
