@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import "regenerator-runtime/runtime"; // import this to use async/await with parcel
 import Transaction from "./Transaction";
+import { Button } from "react-bootstrap";
 
 const TransactionPool = () => {
   const [transactionPoolMap, setTransactionPoolMap] = useState({});
+  const history = useHistory();
   const fetchTransactionPoolMap = async () => {
     const res = await axios.get(
       "http://localhost:3000/api/transaction-pool-map"
     );
 
     setTransactionPoolMap(res.data);
+  };
+
+  const fetchMineTransactions = async () => {
+    const res = await axios.get("http://localhost:3000/api/mine-transaction");
+    console.dir(res);
+    if (res.status === 200) {
+      alert("Mine transaction successful");
+      history.push("/blocks");
+    } else {
+      alert("Mine transaction error!", res.status);
+    }
   };
 
   useEffect(() => {
@@ -33,6 +46,7 @@ const TransactionPool = () => {
           ></Transaction>
         </div>
       ))}
+      <Button onClick={fetchMineTransactions}>Mine transaction</Button>
     </div>
   );
 };

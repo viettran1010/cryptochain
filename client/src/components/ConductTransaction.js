@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FormGroup, FormControl, Button } from "react-bootstrap";
 import "regenerator-runtime/runtime"; // import this to use async/await with parcel
 import axios from "axios";
 
 const ConductTransaction = () => {
-  const [recipient, setRecipient] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [recipient, setRecipient] = useState("any-recipient");
+  const [amount, setAmount] = useState(100);
+  const history = useHistory();
 
   const updateRecipient = (event) => {
     setRecipient(event.target.value);
@@ -17,10 +18,11 @@ const ConductTransaction = () => {
   };
 
   const conductTransaction = async () => {
-    const res = await axios.post("http://localhost:3000/api/transact", {
+    await axios.post("http://localhost:3000/api/transact", {
       recipient,
       amount,
     });
+    history.push("/transaction-pool");
   };
 
   return (
