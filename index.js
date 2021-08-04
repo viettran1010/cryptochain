@@ -11,7 +11,8 @@ const cors = require("cors");
 
 const isDevelopment = process.env.ENV === "development";
 
-const REDIS_URL = "redis://127.0.0.1:6379";
+// const REDIS_URL = "redis://127.0.0.1:6379";
+const REDIS_URL = "redis://64.225.91.48:6379";
 const DEFAULT_PORT = 3000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 
